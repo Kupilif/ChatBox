@@ -1,0 +1,102 @@
+﻿<Window x:Class="ChatBoxClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChatBoxClient"
+        mc:Ignorable="d"
+        Title="ChatBoxClient" Height="450" Width="600" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Menu x:Name="mMainMenu" Grid.Row="0" Height="20" VerticalAlignment="Top">
+            <MenuItem x:Name="miMenu" Header="Меню">
+                <MenuItem x:Name="msiDisconnectFromServer" Header="Отключиться от сервера" Click="msiDisconnectFromServer_Click"></MenuItem>
+                <Separator />
+                <MenuItem x:Name="msiMainMenu" Header="Главное меню" Click="msiMainMenu_Click"></MenuItem>
+                <Separator />
+                <MenuItem x:Name="msiExit" Header="Выход" Click="msiExit_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <Grid x:Name="pageMainMenu" Grid.Row="1" Background="#0F00FF00" Visibility="Visible">
+        <Label Content="IP-адрес сервера"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="30" Margin="0, -250, 0, 0"/>
+            <TextBox x:Name="tbServerIP" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="20" Margin="0, -200, 0, 0" TextChanged="tbServerIP_TextChanged"/>
+
+            <Label Content="Порт сервера"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="30" Margin="0, -100, 0, 0"/>
+            <TextBox x:Name="tbServerPort" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="20" Margin="0, -50, 0, 0" TextChanged="tbServerPort_TextChanged"/>
+
+            <Label Content="Ваше имя"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="30" Margin="0, 50, 0, 0"/>
+            <TextBox x:Name="tbName" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="20" Margin="0, 100, 0, 0" TextChanged="tbName_TextChanged"/>
+
+            <Button x:Name="btnConnectToServer" IsEnabled="False" Content="Подключиться к серверу" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="30" Margin="0, 200, 0, 0" Click="btnConnectToServer_Click"/>
+        </Grid>
+
+
+            <Grid x:Name="pageClientDialog" Grid.Row="1" Background="#0F00FF00" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="170"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label x:Name="labIP" Margin="5, 0, 0, 0" FontWeight="Bold" Content="IP сервера:" Grid.Row="0"></Label>
+                <Label x:Name="labConnectionStatusText" Margin="200, 0, 0, 0" FontWeight="Bold" Content="Статус подключения к серверу:" Grid.Row="0"></Label>
+                <Label x:Name="labConnectionStatus" Margin="390, 0, 0, 0" FontWeight="Bold" Content="Статус" Grid.Row="0"></Label>
+
+                <Label x:Name="labPort" Margin="5, 0, 0, 0" FontWeight="Bold" Content="Порт сервера:" Grid.Row="1"></Label>
+                <Label x:Name="labUsernameText" Margin="200, 0, 0, 0" FontWeight="Bold" Content="Имя на сервере:" Grid.Row="1"></Label>
+                <Label x:Name="labUsername" Margin="300, 0, 0, 0" FontWeight="Bold" Content="Имя" Grid.Row="1"></Label>
+            </Grid>
+
+            <Grid x:Name="panelDialogs" Grid.Row="1" Grid.Column="0">
+                <RichTextBox x:Name="rtbPublicDialog" Margin="5, 0, 5, 0" IsReadOnly="True" VerticalScrollBarVisibility="Auto" FontWeight="Bold" FontSize="14">
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run />
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="1">
+                <ListBox x:Name="lbUsers" Margin="5, 0, 5, 0" SelectionChanged="lbUsers_SelectionChanged"></ListBox>
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="0">
+                <TextBox x:Name="tbSendMessage" Height="20" Margin="5, 0, 5, 0" KeyDown="tbSendMessage_KeyDown"></TextBox>
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="btnSendMessage" Content="Отправить" Height="20" Margin="5, 0, 5, 0" Grid.Column="1" Click="btnSendMessage_Click"></Button>
+                <Button x:Name="btnSmiles" Background="White" Height="20" Width="20" Margin="5, 0, 5, 0" Grid.Column="0" Click="btnSmiles_Click"></Button>
+
+                <Popup x:Name="pSmiles" Placement="MousePoint" Width="165" Height="100" IsOpen="False" MouseLeave="pSmiles_MouseLeave">
+                    <ScrollViewer Background="White">
+                        <WrapPanel x:Name="wpSmiles">
+
+                        </WrapPanel>
+                    </ScrollViewer>
+                </Popup>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

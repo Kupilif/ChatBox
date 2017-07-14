@@ -24,6 +24,10 @@ bld/
 [Oo]bj/
 [Ll]og/
 
+!/ChatBoxClient/bin/
+/ChatBoxClient/bin/*
+!/ChatBoxClient/bin/Debug/
+/ChatBoxClient/bin/Debug/*
 !/ChatBoxClient/bin/Debug/smiles/
 
 # Visual Studio 2015 cache/options directory
